@@ -33,16 +33,19 @@
 
     </com.google.android.material.navigation.NavigationView>
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabsGenre"
         app:layout_constraintTop_toBottomOf="@id/navTop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
         app:tabIndicatorColor="@color/black"
         app:tabSelectedTextColor="@color/white"
-        app:tabMode="fixed"
-        app:tabTextAppearance="@style/CustomTabText">
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabPaddingEnd="100dp">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tabMovie"
@@ -63,9 +66,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="인기"
-        app:layout_constraintStart_toStartOf="@id/tabsGenre"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/spinner_genre"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="35dp"
         android:textSize="20sp"/>
 
     <Spinner
