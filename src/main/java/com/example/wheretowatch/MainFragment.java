@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
-
+//테스트용 주석
     private Spinner type_spinner, genre_spinner;
     private static final String[] type = {"영화", "드라마"};
     private static final String[] genre = {"로맨스", "공포/ 스릴러", "SF/ 판타지", "액션", "코미디"};
