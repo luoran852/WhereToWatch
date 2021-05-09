@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "703124144466",
+    "project_id": "wheretowatch-f23cd",
+    "storage_bucket": "wheretowatch-f23cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703124144466:android:fad38fd4ae67becb84fa8b",
+        "android_client_info": {
+          "package_name": "com.example.wheretowatch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703124144466-if5m3qm4g2juj75qu12s330qvuellbnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Bz6aNcYQEmMfsKXH5Fz3sF7MzDqpcKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703124144466-if5m3qm4g2juj75qu12s330qvuellbnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
