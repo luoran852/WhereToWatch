@@ -1,17 +1,21 @@
 package com.example.wheretowatch;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,8 @@ public class MyPageFragment extends Fragment {
     private RecyclerViewAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ItemMovie> movies = new ArrayList<ItemMovie>();
+    private Button btn_login, btn_logout; // 로그인, 로그아웃 버튼
+    private FirebaseAuth mFirebaseAuth;
 
     @Nullable
     @Override
@@ -31,6 +37,11 @@ public class MyPageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
+//        btn_login.setVisib    ility(View.INVISIBLE); // 로그인 버튼 숨기기
+//        btn_logout.setVisibility(View.VISIBLE); // 로그아웃 버튼 보이기
 
         for(int i=0; i<5; i++) {
             movies.add(new ItemMovie(R.drawable.about));
@@ -55,7 +66,9 @@ public class MyPageFragment extends Fragment {
         recyclerView_record.setLayoutManager(linearLayoutManager);
         recyclerView_record.setAdapter(adapter);
 
-        Button btn_login = (Button) getView().findViewById(R.id.btn_login);
+        btn_login = (Button) getView().findViewById(R.id.btn_login);
+        btn_logout = (Button) getView().findViewById(R.id.btn_logout);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +77,19 @@ public class MyPageFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 로그아웃 하기
+                mFirebaseAuth.signOut();
+
+                Toast.makeText(getActivity(), "로그아웃에 성공했습니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 탈퇴 처리
+        // mFirebaseAuth.getCurrentUser().delete();
 
     }
 }
