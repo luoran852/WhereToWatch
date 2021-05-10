@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class SearchFragment extends Fragment {
         AppCompatButton eraseBtn = (AppCompatButton)view.findViewById(R.id.btnErase);
         LinearLayout searchTextInfo = (LinearLayout)view.findViewById(R.id.searchTexts);
         TextView searchName = (TextView)view.findViewById(R.id.searchName);
+        HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
         searchedItems = new ArrayList();
 
         searchText.setOnKeyListener(new View.OnKeyListener() {
@@ -53,6 +55,7 @@ public class SearchFragment extends Fragment {
                     String searchString = searchText.getText().toString();
                     Log.d("search", searchString);
                     searchTextInfo.setVisibility(View.VISIBLE);
+                    recommends.setVisibility(View.VISIBLE);
                     searchName.setText(searchString);
                 }
                 return false;
@@ -65,6 +68,7 @@ public class SearchFragment extends Fragment {
                 String searchString = searchText.getText().toString();
                 Log.d("search", searchString);
                 searchTextInfo.setVisibility(View.VISIBLE);
+                recommends.setVisibility(View.VISIBLE);
                 searchName.setText(searchString);
                 searchedItems.add(new ItemSearched(R.drawable.vincenzo, searchString, "2021", "드라마", "15세 이상"));
                 search(view);
@@ -77,6 +81,7 @@ public class SearchFragment extends Fragment {
                 searchText.getText().clear();
                 searchTextInfo.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
+                recommends.setVisibility(View.INVISIBLE);
             }
         });
 
