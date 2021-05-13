@@ -17,6 +17,7 @@ allprojects {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.gms:google-services'
 //plugins {
 //    id 'com.android.application'

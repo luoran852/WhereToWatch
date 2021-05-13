@@ -1,6 +1,5 @@
 package com.example.wheretowatch;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.core.Context;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,11 @@ public class MyPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        FirebaseApp.initializeApp(getContext()); // firebase 초기화
+
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-//        btn_login.setVisib    ility(View.INVISIBLE); // 로그인 버튼 숨기기
+//        btn_login.setVisibility(View.INVISIBLE); // 로그인 버튼 숨기기
 //        btn_logout.setVisibility(View.VISIBLE); // 로그아웃 버튼 보이기
 
         for(int i=0; i<5; i++) {
