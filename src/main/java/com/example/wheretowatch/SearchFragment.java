@@ -48,6 +48,7 @@ public class SearchFragment extends Fragment {
         HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
         searchedItems = new ArrayList();
 
+        // If enter pressed, do search
         searchText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -62,6 +63,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        // If search button pressed, do search
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        // If erase button pressed, erase text
         eraseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
