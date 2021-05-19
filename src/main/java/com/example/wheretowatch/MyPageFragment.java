@@ -25,7 +25,11 @@ public class MyPageFragment extends Fragment {
     private RecyclerView recyclerView_keep, recyclerView_record;
     private RecyclerViewAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
+<<<<<<< HEAD
     private ArrayList<Movie> movies = new ArrayList<Movie>();
+=======
+    private ArrayList<Movie> mMovieList;
+>>>>>>> 7376e321a39499d0d4c5137d62962e6adadccda8
     private Button btn_login, btn_logout; // 로그인, 로그아웃 버튼
     private FirebaseAuth mFirebaseAuth;
 
@@ -46,14 +50,17 @@ public class MyPageFragment extends Fragment {
 //        btn_login.setVisibility(View.INVISIBLE); // 로그인 버튼 숨기기
 //        btn_logout.setVisibility(View.VISIBLE); // 로그아웃 버튼 보이기
 
+<<<<<<< HEAD
 //        for(int i=0; i<5; i++) {
 //            movies.add(new ItemMovie(R.drawable.about));
 //            movies.add(new ItemMovie(R.drawable.notebook));
 //        }
+=======
+>>>>>>> 7376e321a39499d0d4c5137d62962e6adadccda8
 
         //recyclerview 보고싶어요(찜하기+평가하기)
         recyclerView_keep = (RecyclerView)view.findViewById(R.id.mypage_rvRanking_keep);
-        adapter = new RecyclerViewAdapter(getContext(), movies);
+        adapter = new RecyclerViewAdapter(getContext(), mMovieList);
 
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView_keep.setHasFixedSize(true);
@@ -62,7 +69,7 @@ public class MyPageFragment extends Fragment {
 
         //recyclerview 시청기록
         recyclerView_record = (RecyclerView)view.findViewById(R.id.mypage_rvRanking_record);
-        adapter = new RecyclerViewAdapter(getContext(), movies);
+        adapter = new RecyclerViewAdapter(getContext(), mMovieList);
 
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView_record.setHasFixedSize(true);

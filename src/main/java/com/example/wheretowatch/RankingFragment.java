@@ -25,7 +25,11 @@ public class RankingFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private GridLayoutManager gridLayoutManager;
+<<<<<<< HEAD
     private ArrayList<Movie> movies = new ArrayList<Movie>();
+=======
+    private ArrayList<Movie> mMovieList;
+>>>>>>> 7376e321a39499d0d4c5137d62962e6adadccda8
 
     @Nullable
     @Override
@@ -53,13 +57,16 @@ public class RankingFragment extends Fragment {
             }
         });
 
+<<<<<<< HEAD
 //        for(int i=0; i<5; i++) {
 //            movies.add(new ItemMovie(R.drawable.about));
 //            movies.add(new ItemMovie(R.drawable.notebook));
 //        }
 
+=======
+>>>>>>> 7376e321a39499d0d4c5137d62962e6adadccda8
         recyclerView = (RecyclerView)view.findViewById(R.id.rvRanking);
-        adapter = new RecyclerViewAdapter(getContext(), movies);
+        adapter = new RecyclerViewAdapter(getContext(), mMovieList);
 
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
 

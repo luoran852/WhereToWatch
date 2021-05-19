@@ -21,8 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
@@ -48,7 +46,6 @@ public class SearchFragment extends Fragment {
         LinearLayout searchTextInfo = (LinearLayout)view.findViewById(R.id.searchTexts);
         TextView searchName = (TextView)view.findViewById(R.id.searchName);
         HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
-        TextView tvRec = (TextView)view.findViewById(R.id.tvRec);
         searchedItems = new ArrayList();
 
         // If enter pressed, do search
@@ -60,9 +57,7 @@ public class SearchFragment extends Fragment {
                     Log.d("search", searchString);
                     searchTextInfo.setVisibility(View.VISIBLE);
                     recommends.setVisibility(View.VISIBLE);
-                    tvRec.setVisibility(View.VISIBLE);
                     searchName.setText(searchString);
-                    search(view, searchString);
                 }
                 return false;
             }
@@ -76,9 +71,8 @@ public class SearchFragment extends Fragment {
                 Log.d("search", searchString);
                 searchTextInfo.setVisibility(View.VISIBLE);
                 recommends.setVisibility(View.VISIBLE);
-                tvRec.setVisibility(View.VISIBLE);
                 searchName.setText(searchString);
-                search(view, searchString);
+                search(view);
             }
         });
 
@@ -95,8 +89,7 @@ public class SearchFragment extends Fragment {
 
     }
 
-    public void search(View view, String search) {
-        searchedItems.add(new ItemSearched(R.drawable.vincenzo, search, "2021", "드라마", "15세 이상"));
+    public void search(View view) {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new RvAdapter(searchedItems);

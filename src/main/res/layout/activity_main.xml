@@ -9,7 +9,6 @@
     android:background="@color/black">
 
 
-
     <FrameLayout
         android:id="@+id/mainFragment"
         android:layout_width="match_parent"
