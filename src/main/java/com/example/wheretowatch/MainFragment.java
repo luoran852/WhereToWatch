@@ -117,8 +117,4 @@ public class MainFragment extends Fragment {
 
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7376e321a39499d0d4c5137d62962e6adadccda8
