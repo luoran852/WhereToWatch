@@ -1,7 +1,6 @@
 package com.example.wheretowatch;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,46 +9,63 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolders> {
 
-    Context context;
-    ArrayList<ItemMovie> list;
+    private ArrayList<Movie> mMovieList;
+    private LayoutInflater mInflate;
+    private Context context;
 
-    RecyclerViewAdapter(Context context, ArrayList<ItemMovie> list) {
-        super();
-        Log.d("list", list.toString());
+    //constructor
+    public RecyclerViewAdapter(Context context, ArrayList<Movie> itemList) {
         this.context = context;
-        this.list = list;
+        this.mInflate = LayoutInflater.from(context);
+        this.mMovieList = itemList;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.img_item, parent, false);
-        return new MyViewHolder(view);
+    public RecyclerViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = mInflate.inflate(R.layout.img_item, parent, false);
+        RecyclerViewHolders viewHolder = new RecyclerViewHolders(view);
+        return viewHolder;
     }
+
+
+
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.poster.setImageResource(list.get(position).image);
+    public void onBindViewHolder(@NonNull RecyclerViewHolders holder, int position) {
+
+       String url = "https://image.tmdb.org/t/p/w500" + mMovieList.get(position).getPoster_path();
+
+        Glide.with(context)
+                .load(url)
+                .override(300)
+                .into(holder.poster);
     }
+
+
+
 
     @Override
-    public int getItemCount() {
-        return 10;
+    public int getItemCount()
+    {
+        return this.mMovieList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class RecyclerViewHolders extends RecyclerView.ViewHolder {
         ImageView poster;
 
-        public MyViewHolder(View itemView) {
+        public RecyclerViewHolders(View itemView) {
             super(itemView);
-            poster = itemView.findViewById(R.id.ivPoster);
+            poster = (ImageView) itemView.findViewById(R.id.ivPoster);
         }
+    }
 
     }
-}
+
 
