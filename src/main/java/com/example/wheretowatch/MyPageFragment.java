@@ -25,7 +25,7 @@ public class MyPageFragment extends Fragment {
     private RecyclerView recyclerView_keep, recyclerView_record;
     private RecyclerViewAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList<ItemMovie> movies = new ArrayList<ItemMovie>();
+    private ArrayList<Movie> movies = new ArrayList<Movie>();
     private Button btn_login, btn_logout; // 로그인, 로그아웃 버튼
     private FirebaseAuth mFirebaseAuth;
 
@@ -46,10 +46,10 @@ public class MyPageFragment extends Fragment {
 //        btn_login.setVisibility(View.INVISIBLE); // 로그인 버튼 숨기기
 //        btn_logout.setVisibility(View.VISIBLE); // 로그아웃 버튼 보이기
 
-        for(int i=0; i<5; i++) {
-            movies.add(new ItemMovie(R.drawable.about));
-            movies.add(new ItemMovie(R.drawable.notebook));
-        }
+//        for(int i=0; i<5; i++) {
+//            movies.add(new ItemMovie(R.drawable.about));
+//            movies.add(new ItemMovie(R.drawable.notebook));
+//        }
 
         //recyclerview 보고싶어요(찜하기+평가하기)
         recyclerView_keep = (RecyclerView)view.findViewById(R.id.mypage_rvRanking_keep);
