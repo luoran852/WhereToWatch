@@ -65,9 +65,17 @@ public class MainFragment extends Fragment {
                 }
                 adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_romance.setAdapter(adapter);
+
+                adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_thrill.setAdapter(adapter);
+
+                adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_sf.setAdapter(adapter);
+
+                adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_action.setAdapter(adapter);
+
+                adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_comedy.setAdapter(adapter);
 
             }
