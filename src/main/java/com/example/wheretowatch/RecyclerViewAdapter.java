@@ -44,7 +44,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Glide.with(context)
                 .load(url)
-                .override(300)
                 .into(holder.poster);
     }
 

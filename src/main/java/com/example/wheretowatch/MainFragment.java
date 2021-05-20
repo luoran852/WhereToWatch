@@ -48,9 +48,14 @@ public class MainFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        String url = "https://api.themoviedb.org/3/movie/popular?api_key=826cafb8c742dafa93adc0139b528230&language=ko-KR&page=1";
+        String url = "https://api.themoviedb.org/3/movie/upcoming?api_key=826cafb8c742dafa93adc0139b528230&language=ko-KR&page=1";
 
-        recyclerView_romance = (RecyclerView)view.findViewById(R.id.main_rvRanking_romance);
+        recyclerView_romance = (RecyclerView) view.findViewById(R.id.main_rvRanking_romance);
+        recyclerView_thrill = (RecyclerView) view.findViewById(R.id.main_rvRanking_thrill);
+        recyclerView_sf = (RecyclerView) view.findViewById(R.id.main_rvRanking_sf);
+        recyclerView_action = (RecyclerView) view.findViewById(R.id.main_rvRanking_action);
+        recyclerView_comedy = (RecyclerView) view.findViewById(R.id.main_rvRanking_comedy);
+
 
         new MyAsyncTask(getContext(), new TaskCompleted() {
             @Override
@@ -58,14 +63,37 @@ public class MainFragment extends Fragment {
                 for(Movie p : result){
                     mMovieList.add(p);
                 }
-                adapter = new RecyclerViewAdapter(getContext(), mMovieList);
+                adapter = new RecyclerViewAdapter(getContext() , mMovieList);
                 recyclerView_romance.setAdapter(adapter);
+                recyclerView_thrill.setAdapter(adapter);
+                recyclerView_sf.setAdapter(adapter);
+                recyclerView_action.setAdapter(adapter);
+                recyclerView_comedy.setAdapter(adapter);
+
             }
         }).execute(url);
+
 
         linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView_romance.setHasFixedSize(true);
         recyclerView_romance.setLayoutManager(linearLayoutManager);
+
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_thrill.setHasFixedSize(true);
+        recyclerView_thrill.setLayoutManager(linearLayoutManager);
+
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_sf.setHasFixedSize(true);
+        recyclerView_sf.setLayoutManager(linearLayoutManager);
+
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_action.setHasFixedSize(true);
+        recyclerView_action.setLayoutManager(linearLayoutManager);
+
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView_comedy.setHasFixedSize(true);
+        recyclerView_comedy.setLayoutManager(linearLayoutManager);
+
         return view;
 
 
