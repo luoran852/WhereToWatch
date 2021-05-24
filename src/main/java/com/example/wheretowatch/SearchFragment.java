@@ -23,12 +23,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SearchFragment extends Fragment {
 
-    RecyclerView mRecyclerView ;
+    RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RvAdapter mAdapter;
-    ArrayList searchedItems;
+    ArrayList<SearchedMovie> searchedItems;
+
+    private String api_key = "89247ab465eba040acb566dcd1724b96";
+    private final String baseUrl = "https://api.themoviedb.org/3/";
+    private SearchRequest searchRequest;
 
     @Nullable
     @Override
@@ -48,6 +58,12 @@ public class SearchFragment extends Fragment {
         HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
         searchedItems = new ArrayList();
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        searchRequest = retrofit.create(SearchRequest.class);
+
         // If enter pressed, do search
         searchText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -58,6 +74,16 @@ public class SearchFragment extends Fragment {
                     searchTextInfo.setVisibility(View.VISIBLE);
                     recommends.setVisibility(View.VISIBLE);
                     searchName.setText(searchString);
+
+                    mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
+                    mLayoutManager = new LinearLayoutManager(getActivity());
+                    mAdapter = new RvAdapter(getContext(), searchedItems);
+
+                    mRecyclerView.setHasFixedSize(true);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    search(v, searchString);
                 }
                 return false;
             }
@@ -72,7 +98,15 @@ public class SearchFragment extends Fragment {
                 searchTextInfo.setVisibility(View.VISIBLE);
                 recommends.setVisibility(View.VISIBLE);
                 searchName.setText(searchString);
-                search(view);
+
+                mRecyclerView = (RecyclerView)v.findViewById(R.id.rvSearched);
+                mLayoutManager = new LinearLayoutManager(getActivity());
+                mAdapter = new RvAdapter(getContext(), searchedItems);
+
+                mRecyclerView.setHasFixedSize(true);
+                mRecyclerView.setLayoutManager(mLayoutManager);
+                mRecyclerView.setAdapter(mAdapter);
+                search(view, searchString);
             }
         });
 
@@ -81,6 +115,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 searchText.getText().clear();
+                searchedItems.clear();
                 searchTextInfo.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 recommends.setVisibility(View.INVISIBLE);
@@ -89,15 +124,38 @@ public class SearchFragment extends Fragment {
 
     }
 
-    public void search(View view) {
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mAdapter = new RvAdapter(searchedItems);
-
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+    public void search(View view, String query) {
+        Call<SearchResponse> searchMovie = searchRequest.searchMovie(api_key, query);
+        searchMovie.enqueue(responseCallback);
 
         mRecyclerView.setVisibility(View.VISIBLE);
     }
+
+    private Callback<SearchResponse> responseCallback = new Callback<SearchResponse>() {
+        @Override
+        public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+            if (response.isSuccessful()) {
+                Log.d("ResponseSuccess", "Success");
+                SearchedMovie[] result= response.body().getResults();
+                int total = response.body().getResults().length;
+                Log.d("ResponseSuccess", String.valueOf(total));
+
+                for (int i=0; i<total; i++) {
+                    Log.d("ResponseSuccess", result[i].getTitle() + " "+i);
+                    searchedItems.add(result[i]);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+            else {
+                Log.d("ResponseError", response.raw().toString());
+            }
+        }
+
+        @Override
+        public void onFailure(Call<SearchResponse> call, Throwable t) {
+            Log.d("Response", "Fail");
+            t.printStackTrace();
+        }
+    };
+
 }

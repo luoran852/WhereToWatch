@@ -1,5 +1,6 @@
 package com.example.wheretowatch;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static java.lang.Math.round;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
-    private ArrayList<ItemSearched> contents;
+    private ArrayList<SearchedMovie> contents;
+    private Context context;
 
-    public RvAdapter(ArrayList searchData) {
+    public RvAdapter(Context context, ArrayList searchData) {
+        this.context = context;
         contents = searchData;
+        initMap();
     }
 
     @NonNull
@@ -29,11 +40,19 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RvAdapter.ViewHolder holder, int position) {
-        holder.searchedPoster.setImageResource(contents.get(position).image);
-        holder.searchedTitle.setText(contents.get(position).title);
-        holder.searchedYear.setText(contents.get(position).year);
-        holder.searchedAge.setText(contents.get(position).age);
-        holder.searchedGenre.setText(contents.get(position).genre);
+
+        holder.searchedTitle.setText(contents.get(position).getTitle());
+        holder.searchedYear.setText(contents.get(position).getRelease_date());
+        holder.searchedPopularity.setText(contents.get(position).getVote_average()+"");
+        if (contents.get(position).getAdult()) {
+            holder.searchedAge.setVisibility(View.VISIBLE);
+        }
+
+        String url = "https://image.tmdb.org/t/p/w500" + contents.get(position).getPoster_path();
+
+        Glide.with(context)
+                .load(url)
+                .into(holder.searchedPoster);
     }
 
     @Override
@@ -47,6 +66,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         TextView searchedGenre;
         TextView searchedYear;
         TextView searchedAge;
+        TextView searchedPopularity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +76,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
             searchedGenre = (TextView)itemView.findViewById(R.id.searchedGenre);
             searchedYear = (TextView)itemView.findViewById(R.id.searchedYear);
             searchedAge = (TextView)itemView.findViewById(R.id.searchedAge);
+            searchedPopularity = itemView.findViewById(R.id.searchedPopularity);
         }
+    }
+
+    public void initMap() {
+        HashMap<Integer, String> genre = new HashMap<>();
+        genre.put(28, "ACTION");
     }
 }
