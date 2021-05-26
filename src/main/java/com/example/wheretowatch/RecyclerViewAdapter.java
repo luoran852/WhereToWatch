@@ -1,6 +1,7 @@
 package com.example.wheretowatch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +46,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Glide.with(context)
                 .load(url)
                 .into(holder.poster);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("id", mMovieList.get(position).getId());
+                intent.putExtra("title", mMovieList.get(position).getTitle());
+                intent.putExtra("original_title", mMovieList.get(position).getOriginal_title());
+                intent.putExtra("poster_path", mMovieList.get(position).getPoster_path());
+                intent.putExtra("overview", mMovieList.get(position).getOverview());
+                intent.putExtra("release_date", mMovieList.get(position).getRelease_date());
+                intent.putExtra("name", mMovieList.get(position).getName());
+
+                context.startActivity(intent);
+            }
+        });
     }
 
 

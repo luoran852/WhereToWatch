@@ -30,7 +30,7 @@ public class Movie {
         return original_title;
     }
 
-    public int getID()
+    public int getId()
     {
         return id;
     }
