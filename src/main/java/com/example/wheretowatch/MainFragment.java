@@ -2,6 +2,7 @@ package com.example.wheretowatch;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,16 +33,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MainFragment extends Fragment {
-    //테스트용 주석
-    private Spinner type_spinner, genre_spinner;
+
     private String start_url;
     private RecyclerView recyclerView_romance, recyclerView_thrill, recyclerView_sf, recyclerView_action, recyclerView_comedy;
-    private static final String[] type = {"영화", "드라마"};
-    private static final String[] genre = {"로맨스", "공포/ 스릴러", "SF/ 판타지", "액션", "코미디"};
     private RecyclerViewAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<Movie> mMovieList = new ArrayList<Movie>();
-
+    TextView txt_romance; //리싸이클러뷰 테스트용 text
 
     @Nullable
     @Override
@@ -56,6 +55,16 @@ public class MainFragment extends Fragment {
         recyclerView_action = (RecyclerView) view.findViewById(R.id.main_rvRanking_action);
         recyclerView_comedy = (RecyclerView) view.findViewById(R.id.main_rvRanking_comedy);
 
+        // 임시 클릭리스너
+        txt_romance = (TextView) view.findViewById(R.id.txt_romance);
+        txt_romance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 상세 액티비티로 이동
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         new MyAsyncTask(getContext(), new TaskCompleted() {
             @Override
@@ -107,49 +116,6 @@ public class MainFragment extends Fragment {
 
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        //종류 spinner
-        type_spinner = (Spinner) view.findViewById(R.id.main_spinner_type);
-        ArrayAdapter<String> typeSpinnerAdapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, type);
-        typeSpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        type_spinner.setAdapter(typeSpinnerAdapter);
-        type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("menu", position + "");
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //장르 spinner
-        genre_spinner = (Spinner) view.findViewById(R.id.main_spinner_genre);
-        ArrayAdapter<String> genreSpinnerAdapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, genre);
-        genreSpinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        genre_spinner.setAdapter(genreSpinnerAdapter);
-        genre_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("menu", position + "");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-    }
 
 
 
