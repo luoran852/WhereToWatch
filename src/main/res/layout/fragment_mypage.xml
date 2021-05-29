@@ -55,16 +55,29 @@
         android:layout_margin="10dp"/>
 
     <TextView
+        android:id="@+id/txt_before_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서비스를 이용하시려면 로그인하세요."
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"/>
+
+    <TextView
         android:id="@+id/txt_keep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="찜 목록"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"/>
 
     <HorizontalScrollView
@@ -82,8 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:listitem="@layout/img_item"
-            android:layout_marginTop="10dp"/>
+            tools:listitem="@layout/img_item"/>
 
     </HorizontalScrollView>
 
@@ -92,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="시청기록"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -115,8 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            tools:listitem="@layout/img_item"
-            android:layout_marginTop="10dp"/>
+            tools:listitem="@layout/img_item"/>
 
     </HorizontalScrollView>
 

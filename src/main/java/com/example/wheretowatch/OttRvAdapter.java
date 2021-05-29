@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class OttRvAdapter extends RecyclerView.Adapter<OttRvAdapter.ViewHolder> {
 
-    private ArrayList<SearchedMovie> contents;
+    private ArrayList<String> contents;
     private Context context;
 
     public OttRvAdapter(Context context, ArrayList searchData) {
@@ -33,16 +33,16 @@ public class OttRvAdapter extends RecyclerView.Adapter<OttRvAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OttRvAdapter.ViewHolder holder, int position) {
-
-//        Glide.with(context)
-//                .load(url)
-//                .into(holder.img_ott);
+        String url = "https://image.tmdb.org/t/p/w500" + contents.get(position);
+        Glide.with(context)
+                .load(url)
+                .into(holder.img_ott);
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return contents.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

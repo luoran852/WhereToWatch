@@ -14,14 +14,14 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.RecyclerViewHolders> {
+public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.RecyclerViewHolders> {
 
     private ArrayList<Movie> mMovieList;
     private Context context;
     private OnMovieClickListener mOnMovieClickListener;
 
     //constructor
-    public RecyclerViewAdapter(Context context, ArrayList<Movie> itemList, OnMovieClickListener mOnMovieClickListener) {
+    public MyPageAdapter(Context context, ArrayList<Movie> itemList, OnMovieClickListener mOnMovieClickListener) {
         super();
         this.context = context;
         this.mMovieList = itemList;
@@ -41,9 +41,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolders holder, int position) {
 
+        //String url = mMovieList.get(position).getPoster_path();
         String url = "https://image.tmdb.org/t/p/w500" + mMovieList.get(position).getPoster_path();
 
-        Glide.with(context)
+        Glide.with(holder.itemView.getContext())
                 .load(url)
                 .into(holder.poster);
 //

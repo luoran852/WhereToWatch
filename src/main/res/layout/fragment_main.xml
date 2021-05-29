@@ -51,7 +51,7 @@
                 android:id="@+id/txt_romance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="로맨스"
+                android:text="드라마"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/white"

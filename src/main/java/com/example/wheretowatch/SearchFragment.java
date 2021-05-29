@@ -1,5 +1,6 @@
 package com.example.wheretowatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.KeyListener;
 import android.util.Log;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -29,12 +31,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SearchFragment extends Fragment {
+import static android.content.ContentValues.TAG;
+
+public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickListener {
 
     RecyclerView mRecyclerView;
     RecyclerView.LayoutManager mLayoutManager;
     RvAdapter mAdapter;
-    ArrayList<SearchedMovie> searchedItems;
+//    ArrayList<SearchedMovie> searchedItems;
+    ArrayList<SearchedMovie> searchedMovies;
 
     private String api_key = "89247ab465eba040acb566dcd1724b96";
     private final String baseUrl = "https://api.themoviedb.org/3/";
@@ -56,7 +61,7 @@ public class SearchFragment extends Fragment {
         LinearLayout searchTextInfo = (LinearLayout)view.findViewById(R.id.searchTexts);
         TextView searchName = (TextView)view.findViewById(R.id.searchName);
         HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
-        searchedItems = new ArrayList();
+        searchedMovies = new ArrayList();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -75,14 +80,6 @@ public class SearchFragment extends Fragment {
                     recommends.setVisibility(View.VISIBLE);
                     searchName.setText(searchString);
 
-                    mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
-                    mLayoutManager = new LinearLayoutManager(getActivity());
-                    mAdapter = new RvAdapter(getContext(), searchedItems);
-
-                    mRecyclerView.setHasFixedSize(true);
-                    mRecyclerView.setLayoutManager(mLayoutManager);
-                    mRecyclerView.setAdapter(mAdapter);
-
                     search(v, searchString);
                 }
                 return false;
@@ -99,13 +96,7 @@ public class SearchFragment extends Fragment {
                 recommends.setVisibility(View.VISIBLE);
                 searchName.setText(searchString);
 
-                mRecyclerView = (RecyclerView)v.findViewById(R.id.rvSearched);
-                mLayoutManager = new LinearLayoutManager(getActivity());
-                mAdapter = new RvAdapter(getContext(), searchedItems);
 
-                mRecyclerView.setHasFixedSize(true);
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mRecyclerView.setAdapter(mAdapter);
                 search(view, searchString);
             }
         });
@@ -115,7 +106,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 searchText.getText().clear();
-                searchedItems.clear();
+                searchedMovies.clear();
                 searchTextInfo.setVisibility(View.INVISIBLE);
                 mRecyclerView.setVisibility(View.INVISIBLE);
                 recommends.setVisibility(View.INVISIBLE);
@@ -127,6 +118,14 @@ public class SearchFragment extends Fragment {
     public void search(View view, String query) {
         Call<SearchResponse> searchMovie = searchRequest.searchMovie(api_key, query);
         searchMovie.enqueue(responseCallback);
+
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new RvAdapter(getContext(), searchedMovies,this);
+
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setVisibility(View.VISIBLE);
     }
@@ -142,7 +141,10 @@ public class SearchFragment extends Fragment {
 
                 for (int i=0; i<total; i++) {
                     Log.d("ResponseSuccess", result[i].getTitle() + " "+i);
-                    searchedItems.add(result[i]);
+                    Log.d("ResponseSuccess", result[i].getId()+"");
+//                    searchedMovies.add(new Movie(result[i].getTitle(), result[i].getOriginal_title(), result[i].getTitle(), result[i].getId(),
+//                            result[i].getPoster_path(), result[i].getOverview(), result[i].getBackdrop_path(), result[i].getRelease_date()));
+                    searchedMovies.add(result[i]);
                     mAdapter.notifyDataSetChanged();
                 }
             }
@@ -158,4 +160,14 @@ public class SearchFragment extends Fragment {
         }
     };
 
+
+    @Override
+    public void onMovieClick(int position, ArrayList<SearchedMovie> mMovieList) {
+        Log.e(TAG, "onMovieClick: 영화 아이템이 클릭됨" + position);
+
+        // 세부 액티비티로 이동
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("movieList", (Serializable)mMovieList.get(position));
+        startActivity(intent);
+    }
 }

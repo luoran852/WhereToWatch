@@ -8,7 +8,7 @@ public class SearchedMovie {
     private String overview;
     private String release_date;
     ArrayList< Integer > genre_ids = new ArrayList < Integer> ();
-    private float id;
+    private int id;
     private String original_title;
     private String original_language;
     private String title;
@@ -45,7 +45,7 @@ public class SearchedMovie {
         return genre_ids;
     }
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -99,7 +99,7 @@ public class SearchedMovie {
         this.release_date = release_date;
     }
 
-    public void setId(float id) {
+    public void setId(int id) {
         this.id = id;
     }
 

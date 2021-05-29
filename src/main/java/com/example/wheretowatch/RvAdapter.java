@@ -23,19 +23,20 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private ArrayList<SearchedMovie> contents;
     private Context context;
+    private OnMovieClickListener mOnMovieClickListener;
 
-    public RvAdapter(Context context, ArrayList searchData) {
+    public RvAdapter(Context context, ArrayList searchData, OnMovieClickListener mOnMovieClickListener) {
+        super();
         this.context = context;
         contents = searchData;
-        initMap();
+        this.mOnMovieClickListener = mOnMovieClickListener;
     }
 
     @NonNull
     @Override
     public RvAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search, parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        View view = LayoutInflater.from(context).inflate(R.layout.item_search, parent, false);
+        return new ViewHolder(view, mOnMovieClickListener);
     }
 
     @Override
@@ -60,7 +61,9 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         return contents.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        OnMovieClickListener mOnMovieClickListener;
+
         ImageView searchedPoster;
         TextView searchedTitle;
         TextView searchedGenre;
@@ -68,7 +71,7 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         TextView searchedAge;
         TextView searchedPopularity;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnMovieClickListener mOnMovieClickListener) {
             super(itemView);
 
             searchedPoster = (ImageView)itemView.findViewById(R.id.searchedPoster);
@@ -77,11 +80,19 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
             searchedYear = (TextView)itemView.findViewById(R.id.searchedYear);
             searchedAge = (TextView)itemView.findViewById(R.id.searchedAge);
             searchedPopularity = itemView.findViewById(R.id.searchedPopularity);
+
+            this.mOnMovieClickListener = mOnMovieClickListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnMovieClickListener.onMovieClick(getAdapterPosition(), contents);
         }
     }
 
-    public void initMap() {
-        HashMap<Integer, String> genre = new HashMap<>();
-        genre.put(28, "ACTION");
+    public interface OnMovieClickListener {
+        void onMovieClick(int position, ArrayList<SearchedMovie> mMovieList);
     }
+
 }
