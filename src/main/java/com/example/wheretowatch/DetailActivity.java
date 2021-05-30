@@ -53,6 +53,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
     private String api_key = "89247ab465eba040acb566dcd1724b96";
     private final String baseUrl = "https://api.themoviedb.org/3/";
     ProviderRequest providerRequest;
+    OTTRequest ottRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         passedIntent.removeExtra("movieList");
         id = list.getId();
         String idString = Integer.toString(id);
+
 
         FirebaseApp.initializeApp(getApplicationContext()); // firebase 초기화
         userDatabase = FirebaseDatabase.getInstance();
@@ -90,6 +92,8 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         providerRequest = retrofit.create(ProviderRequest.class);
+        ottRequest = retrofit.create(OTTRequest.class);
+
         Call<ProviderResponse> searchMovie = providerRequest.getProvider(id, api_key);
         searchMovie.enqueue(responseCallback);
 
@@ -202,15 +206,14 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 int total = platforms.length;
                 Log.d("ResponseSuccess", String.valueOf(total));
 
-                for (int i=0; i<total; i++) {
-                    Log.d("ResponseSuccess", platforms[i].getName());
-                    if (platforms[i].getLogo_path()!=null) {
-                        ottList.add(platforms[i].getLogo_path());
-                        adapter.notifyDataSetChanged();
-                    }
-
-                }
-
+//                for (int i=0; i<total; i++) {
+//                    Log.d("ResponseSuccess", platforms[i].getName());
+//                    if (platforms[i].getLogo_path()!=null) {
+//                        ottList.add(platforms[i].getLogo_path());
+//                        adapter.notifyDataSetChanged();
+//                    }
+//
+//                }
                 Genre[] genres = response.body().getGenres();
                 String genreText = "";
                 for (int i=0; i<genres.length; i++) {
@@ -223,6 +226,10 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
                 txt_genre.setText(genreText);
                 txt_rating.setText(result.getVote_average()+"");
                 txt_overview.setText(result.getOverview());
+                Log.d("MovieId", id+"");
+
+                Call<OTTResponse> getOTT = ottRequest.getOTT(id, api_key);
+                getOTT.enqueue(responseCallbackOTT);
             }
             else {
                 Log.d("ResponseError", response.raw().toString());
@@ -232,6 +239,64 @@ public class DetailActivity extends AppCompatActivity implements Serializable {
         @Override
         public void onFailure(Call<ProviderResponse> call, Throwable t) {
             Log.d("Response", "Fail");
+            t.printStackTrace();
+        }
+    };
+
+    private Callback<OTTResponse> responseCallbackOTT = new Callback<OTTResponse>() {
+
+        @Override
+        public void onResponse(Call<OTTResponse> call, Response<OTTResponse> response) {
+            if (response.isSuccessful()) {
+                Log.d("OTTResponseSuccess", "Success");
+                if (response.body().getResult().getKR() != null) {
+                    Log.d("OTTResponseSuccess", "getResult");
+                    MovieOTT responseMovie = response.body().getResult().getKR();
+                    if (responseMovie.getRent() != null) {
+                        Log.d("OTTResponseSuccess", "getRent");
+                        Rent[] rent = responseMovie.getRent();
+                        Log.d("MovieOTT", rent.toString());
+                        for (int i=0; i<rent.length; i++) {
+                            Log.d("MovieOTT", rent[i].getProvider_name());
+                            Log.d("MovieOTT", rent[i].getLogo_path());
+//                            ottList.add(rent[i].getLogo_path());
+//                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                    if (responseMovie.getFlatrate() != null) {
+                        Log.d("OTTResponseSuccess", "getFla");
+                        Flatrate[] flatrates = responseMovie.getFlatrate();
+                        Log.d("MovieOTT", flatrates.toString());
+                        for (int i=0; i<flatrates.length; i++) {
+                            Log.d("MovieOTT", flatrates[i].getProvider_name());
+                            Log.d("MovieOTT", flatrates[i].getLogo_path());
+//                            ottList.add(flatrates[i].getLogo_path());
+//                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                    if (responseMovie.getBuy() != null) {
+                        Log.d("OTTResponseSuccess", "getBuy");
+                        Buy[] buys = responseMovie.getBuy();
+                        Log.d("MovieOTT", buys.toString());
+                        for (int i=0; i<buys.length; i++) {
+                            Log.d("MovieOTT", buys[i].getProvider_name());
+                            Log.d("MovieOTT", buys[i].getLogo_path());
+                            ottList.add(buys[i].getLogo_path());
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                }
+
+            }
+            else {
+                Log.d("OTTResponseError", response.raw().toString());
+            }
+        }
+
+        @Override
+        public void onFailure(Call<OTTResponse> call, Throwable t) {
+            Log.d("OTTResponse", "Fail");
             t.printStackTrace();
         }
     };

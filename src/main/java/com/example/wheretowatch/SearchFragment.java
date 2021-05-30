@@ -97,7 +97,6 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
                 recommends.setVisibility(View.VISIBLE);
                 searchName.setText(searchString);
 
-
                 search(view, searchString);
             }
         });
@@ -117,8 +116,6 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
     }
 
     public void search(View view, String query) {
-        Call<SearchResponse> searchMovie = searchRequest.searchMovie(api_key, query);
-        searchMovie.enqueue(responseCallback);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new RvAdapter(getContext(), searchedMovies,this);
@@ -128,6 +125,9 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.setVisibility(View.VISIBLE);
+
+        Call<SearchResponse> searchMovie = searchRequest.searchMovie(api_key, query);
+        searchMovie.enqueue(responseCallback);
     }
 
     private Callback<SearchResponse> responseCallback = new Callback<SearchResponse>() {
