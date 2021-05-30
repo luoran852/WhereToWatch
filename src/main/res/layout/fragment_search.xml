@@ -43,7 +43,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:hint="제목, 감독, 배우로 검색(초성)"
+                    android:hint="제목을 입력하세요"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
