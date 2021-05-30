@@ -83,7 +83,7 @@ public class MyPageFragment extends Fragment implements MyPageAdapter.OnMovieCli
                     overview = ds.child("overview").getValue(String.class);
                     backdrop_path = ds.child("backdrop_path").getValue(String.class);
                     release_date = ds.child("release_date").getValue(String.class);
-                    watchedMovies.add(new Movie(title, original_title, name, id, poster_path, overview, backdrop_path, release_date));
+                    watchedMovies.add(0, new Movie(title, original_title, name, id, poster_path, overview, backdrop_path, release_date));
                     watchAdapter.notifyDataSetChanged();
                 }
             }
@@ -108,7 +108,7 @@ public class MyPageFragment extends Fragment implements MyPageAdapter.OnMovieCli
                     overview = ds.child("overview").getValue(String.class);
                     backdrop_path = ds.child("backdrop_path").getValue(String.class);
                     release_date = ds.child("release_date").getValue(String.class);
-                    keptMovies.add(new Movie(title, original_title, name, id, poster_path, overview, backdrop_path, release_date));
+                    keptMovies.add(0, new Movie(title, original_title, name, id, poster_path, overview, backdrop_path, release_date));
                     keepAdapter.notifyDataSetChanged();
                 }
             }

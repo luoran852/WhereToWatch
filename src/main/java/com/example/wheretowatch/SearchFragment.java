@@ -61,6 +61,7 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
         LinearLayout searchTextInfo = (LinearLayout)view.findViewById(R.id.searchTexts);
         TextView searchName = (TextView)view.findViewById(R.id.searchName);
         HorizontalScrollView recommends = (HorizontalScrollView)view.findViewById(R.id.searchRecs);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
         searchedMovies = new ArrayList();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -119,7 +120,6 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
         Call<SearchResponse> searchMovie = searchRequest.searchMovie(api_key, query);
         searchMovie.enqueue(responseCallback);
 
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.rvSearched);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new RvAdapter(getContext(), searchedMovies,this);
 
@@ -162,7 +162,7 @@ public class SearchFragment extends Fragment implements RvAdapter.OnMovieClickLi
 
 
     @Override
-    public void onMovieClick(int position, ArrayList<SearchedMovie> mMovieList) {
+    public void onMovieClick(int position, ArrayList<Movie> mMovieList) {
         Log.e(TAG, "onMovieClick: 영화 아이템이 클릭됨" + position);
 
         // 세부 액티비티로 이동

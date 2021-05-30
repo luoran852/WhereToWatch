@@ -22,6 +22,7 @@ import static java.lang.Math.round;
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
     private ArrayList<SearchedMovie> contents;
+    private ArrayList<Movie> movies = new ArrayList<>();
     private Context context;
     private OnMovieClickListener mOnMovieClickListener;
 
@@ -54,6 +55,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
         Glide.with(context)
                 .load(url)
                 .into(holder.searchedPoster);
+
+        movies.add(position, new Movie(contents.get(position).getTitle(), contents.get(position).getOriginal_title(), contents.get(position).getTitle(),
+                contents.get(position).getId(), contents.get(position).getPoster_path(), contents.get(position).getOverview(),
+                contents.get(position).getBackdrop_path(), contents.get(position).getRelease_date()));
+
     }
 
     @Override
@@ -87,12 +93,12 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            mOnMovieClickListener.onMovieClick(getAdapterPosition(), contents);
+            mOnMovieClickListener.onMovieClick(getAdapterPosition(), movies);
         }
     }
 
     public interface OnMovieClickListener {
-        void onMovieClick(int position, ArrayList<SearchedMovie> mMovieList);
+        void onMovieClick(int position, ArrayList<Movie> movies);
     }
 
 }

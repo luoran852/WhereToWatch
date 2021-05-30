@@ -1,8 +1,9 @@
 package com.example.wheretowatch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SearchedMovie {
+public class SearchedMovie implements Serializable {
     private String poster_path;
     private boolean adult;
     private String overview;
