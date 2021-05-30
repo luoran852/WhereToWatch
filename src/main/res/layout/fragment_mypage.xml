@@ -80,24 +80,30 @@
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"/>
 
-    <HorizontalScrollView
-        android:id="@+id/keep_hori_scrollView"
-        android:orientation="horizontal"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mypage_rvRanking_keep"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:orientation="horizontal"
         android:scrollbars="none"
-        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_keep">
+        app:layout_constraintTop_toBottomOf="@id/txt_keep"
+        android:layout_margin="10dp"
+        tools:listitem="@layout/img_item"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mypage_rvRanking_keep"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:listitem="@layout/img_item"/>
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/keep_hori_scrollView"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:scrollbars="none"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/txt_keep">-->
 
-    </HorizontalScrollView>
+<!--        -->
+
+<!--    </HorizontalScrollView>-->
 
     <TextView
         android:id="@+id/txt_record"
@@ -108,27 +114,34 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/keep_hori_scrollView"
+        app:layout_constraintTop_toBottomOf="@id/mypage_rvRanking_keep"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"/>
 
-    <HorizontalScrollView
-        android:id="@+id/record_hori_scrollView"
-        android:orientation="horizontal"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mypage_rvRanking_record"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scrollbars="none"
-        android:layout_margin="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_record">
+        app:layout_constraintTop_toBottomOf="@id/txt_record"
+        android:layout_margin="10dp"
+        android:scrollbars="none"
+        android:orientation="horizontal"
+        tools:listitem="@layout/img_item"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mypage_rvRanking_record"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:listitem="@layout/img_item"/>
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/record_hori_scrollView"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="250dp"-->
+<!--        android:scrollbars="none"-->
+<!--        android:layout_margin="10dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/txt_record">-->
 
-    </HorizontalScrollView>
+<!--        -->
+
+<!--    </HorizontalScrollView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

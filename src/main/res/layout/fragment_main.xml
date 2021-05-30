@@ -60,26 +60,31 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"/>
 
-            <HorizontalScrollView
-                android:id="@+id/romance_hori_scrollView"
-                android:orientation="horizontal"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_rvRanking_romance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_romance">
+                app:layout_constraintTop_toBottomOf="@id/txt_romance"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/img_item"
+                android:scrollbars="none"
+                android:layout_margin="10dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_rvRanking_romance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/img_item"
-                    android:layout_marginTop="10dp"/>
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/romance_hori_scrollView"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:layout_margin="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txt_romance">-->
 
-            </HorizontalScrollView>
+<!--                -->
+
+<!--            </HorizontalScrollView>-->
 
             <TextView
                 android:id="@+id/txt_thrill"
@@ -90,29 +95,34 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/romance_hori_scrollView"
+                app:layout_constraintTop_toBottomOf="@id/main_rvRanking_romance"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"/>
 
-            <HorizontalScrollView
-                android:id="@+id/thrill_hori_scrollView"
-                android:orientation="horizontal"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_rvRanking_thrill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_margin="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_thrill">
+                app:layout_constraintTop_toBottomOf="@id/txt_thrill"
+                android:scrollbars="none"
+                android:orientation="horizontal"
+                tools:listitem="@layout/img_item"
+                android:layout_margin="10dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_rvRanking_thrill"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/img_item"
-                    android:layout_marginTop="10dp"/>
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/thrill_hori_scrollView"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:layout_margin="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txt_thrill">-->
 
-            </HorizontalScrollView>
+<!--                -->
+
+<!--            </HorizontalScrollView>-->
 
             <TextView
                 android:id="@+id/txt_sf"
@@ -123,29 +133,34 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/thrill_hori_scrollView"
+                app:layout_constraintTop_toBottomOf="@id/main_rvRanking_thrill"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"/>
 
-            <HorizontalScrollView
-                android:id="@+id/sf_hori_scrollView"
-                android:orientation="horizontal"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_rvRanking_sf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_sf">
+                app:layout_constraintTop_toBottomOf="@id/txt_sf"
+                android:scrollbars="none"
+                tools:listitem="@layout/img_item"
+                android:layout_margin="10dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_rvRanking_sf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/img_item"
-                    android:layout_marginTop="10dp"/>
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/sf_hori_scrollView"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:layout_margin="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txt_sf">-->
 
-            </HorizontalScrollView>
+<!--                -->
+
+<!--            </HorizontalScrollView>-->
 
             <TextView
                 android:id="@+id/txt_action"
@@ -156,29 +171,34 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sf_hori_scrollView"
+                app:layout_constraintTop_toBottomOf="@id/main_rvRanking_sf"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"/>
 
-            <HorizontalScrollView
-                android:id="@+id/action_hori_scrollView"
-                android:orientation="horizontal"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_rvRanking_action"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_margin="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_action">
+                app:layout_constraintTop_toBottomOf="@id/txt_action"
+                android:scrollbars="none"
+                android:orientation="horizontal"
+                tools:listitem="@layout/img_item"
+                android:layout_margin="10dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_rvRanking_action"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/img_item"
-                    android:layout_marginTop="10dp"/>
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/action_hori_scrollView"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:layout_margin="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txt_action">-->
 
-            </HorizontalScrollView>
+<!--                -->
+
+<!--            </HorizontalScrollView>-->
 
             <TextView
                 android:id="@+id/txt_comedy"
@@ -189,29 +209,34 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/action_hori_scrollView"
+                app:layout_constraintTop_toBottomOf="@id/main_rvRanking_action"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"/>
 
-            <HorizontalScrollView
-                android:id="@+id/comedy_hori_scrollView"
-                android:orientation="horizontal"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/main_rvRanking_comedy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txt_comedy">
+                app:layout_constraintTop_toBottomOf="@id/txt_comedy"
+                android:scrollbars="none"
+                tools:listitem="@layout/img_item"
+                android:layout_margin="10dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_rvRanking_comedy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/img_item"
-                    android:layout_marginTop="10dp"/>
+<!--            <HorizontalScrollView-->
+<!--                android:id="@+id/comedy_hori_scrollView"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:scrollbars="none"-->
+<!--                android:layout_margin="10dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txt_comedy">-->
 
-            </HorizontalScrollView>
+<!--                -->
+
+<!--            </HorizontalScrollView>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
